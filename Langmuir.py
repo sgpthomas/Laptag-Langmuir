@@ -8,6 +8,9 @@ currentCh = "C1"
 voltageCh = "C3"
 baseFileName = "_LP_heatpulse_000"
 fileExt = ".txt"
+times = 24
+csvIndex = 4
+zoomRange = (2200, 7000)
 
 #choose file name based on index
 def chooseFileName(index, channel):
@@ -16,13 +19,13 @@ def chooseFileName(index, channel):
 	else:
 		return dataDir + channel + baseFileName + str(index) + fileExt
 		
-def analyzeData():
+def run():
 	#variables
 	count = 0
-	currentSum = np.zeros([4800])
-	voltageSum = np.zeros([4800])
+	currentSum = np.zeros(4800)
+	voltageSum = np.zeros(4800)
 	#loop through all the files and get the relevant data
-	for i in range(24):
+	for i in range(times):
 		current = csv.read_csv(chooseFileName(i, currentCh))
 		current = current[4]
 		current = current[2200:7000]
@@ -40,3 +43,7 @@ def analyzeData():
 	
 	#return
 	return [currentSum, voltageSum]
+
+if __name__ == "__main__":
+	print("This has been run on its own")
+	run()
