@@ -10,7 +10,7 @@ import Langmuir as lm
 import matplotlib.pyplot as plt
 
 #size vars
-curveSize = (1800, 2800)
+curveSize = (2000, 3000)
 extLineNum = 1000
 elSize = (2800, 3800) #ext line size
 tlSize = (3800, 4800) #top line size
@@ -92,5 +92,30 @@ def run():
     plt.grid()
     plt.show()
 
+def graphLog():
+    data = lm.run()
+    I = data[0] * -1
+    v = data[1]
+    i = I[curveSize[0]:curveSize[1]]
+    i = np.log(i)
+    plt.plot(v[0:1000], i)
+    lineCof = np.polyfit(v[curveSize[0]:curveSize[1]], i, 1)
+    print(lineCof)
+    line = [lineCof[0] * x + lineCof[1] for x in np.arange(1000)]
+    plt.plot(v[0:1000], line)
+    #line = np.e**np.array(line)
+    #line *= 0.01
+    #plt.plot(v[curveSize[0]:curveSize[1]], line, "b--", linewidth=2)
+    #plt.plot(v, I, "y")
+    #plt.title("Eq: " + str(lineCof[0]) + "x + " + str(lineCof[1]))
+
+    ret = []
+    for v in v[curveSize[0]:curveSize[1]]:
+        ret.append((-v) / lineCof[0])
+
+    print("Te: " + str(1/lineCof[0]))
+    plt.grid()
+    #plt.show()
+
 if __name__ == "__main__":
-    run()
+    graphLog()

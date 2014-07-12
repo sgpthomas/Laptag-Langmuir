@@ -8,7 +8,7 @@ def read_csv(filepath, output = False):
     readFile = open(filepath, 'r')
     
     #raw data from file split by lines
-    rawData = readFile.read().split("\r\n")
+    rawData = readFile.read().split("\n")
     
     #main for loop that loops through all of the lines
     for line in rawData:

@@ -26,16 +26,16 @@ def run():
 	voltageSum = np.zeros(4800)
 	#loop through all the files and get the relevant data
 	for i in range(times):
-		current = csv.read_csv(chooseFileName(i, currentCh))
-		current = current[4]
-		current = current[2200:7000]
-		voltage = csv.read_csv(chooseFileName(i, voltageCh))
-		voltage = voltage[4]
-		voltage = voltage[2200:7000]
-		
-		currentSum += current
-		voltageSum += voltage
-		count += 1
+				current = csv.read_csv(chooseFileName(i, currentCh))
+				current = current[4]
+				current = current[2200:7000]
+				voltage = csv.read_csv(chooseFileName(i, voltageCh))
+				voltage = voltage[4]
+				voltage = voltage[2200:7000]
+				
+				currentSum += current
+				voltageSum += voltage
+				count += 1
 		
 	#divide by count to get average
 	currentSum /= count
